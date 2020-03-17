@@ -30,13 +30,13 @@ namespace DpkRepacker
                 return;
             }
 
-            if (args[0] == "-c" && args.Length < 2)
+            if (args[0] == "-x" && args.Length < 2)
             {
                 PrintHelp();
                 return;
             }
 
-            if (args[0] == "-x" && args.Length < 3)
+            if (args[0] == "-c" && args.Length < 3)
             {
                 PrintHelp();
                 return;
@@ -94,7 +94,7 @@ namespace DpkRepacker
                         nameSum = (short)fileNameSum,
                         fileOffset = filesOffset,
                         uncompressedSize = (int)fileStream.Length,
-                        compresedSize = (int)ms.Length
+                        compressedSize = (int)ms.Length
                     };
                     fileEntries[fileEntryPosition++] = fileEntry;
 
@@ -156,13 +156,15 @@ namespace DpkRepacker
 
                 var wp16 = Kompression.Implementations.Compressions.Wp16.Build();
 
+                var fileNr = 0;
                 foreach (var fileEntry in fileEntries)
                 {
+                    Console.Write($"File {fileNr++:000}/{fileEntries.Length:000} - ");
                     Console.WriteLine(fileEntry.fileName);
-                    if (fileEntry.compresedSize != fileEntry.uncompressedSize)
+                    if (fileEntry.compressedSize != fileEntry.uncompressedSize)
                     {
                         var destFile = File.Create(Path.Combine(folder, fileEntry.fileName));
-                        var compressedStream = new SubStream(dpkStream, fileEntry.fileOffset, fileEntry.compresedSize);
+                        var compressedStream = new SubStream(dpkStream, fileEntry.fileOffset, fileEntry.compressedSize);
                         wp16.Decompress(compressedStream, destFile);
                         destFile.Close();
                     }

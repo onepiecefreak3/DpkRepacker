@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DpkRepacker": {
+      "commandName": "Project",
+      "commandLineArgs": "-x D:\\Users\\Kirito\\Desktop\\crown.dpk"
+    }
+  }
+}

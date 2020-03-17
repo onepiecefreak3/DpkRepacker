@@ -12,7 +12,7 @@ namespace DpkRepacker.Models
 
         public short nameSum;
         public int fileOffset;
-        public int compresedSize;
+        public int compressedSize;
         public int uncompressedSize;
     }
 }
