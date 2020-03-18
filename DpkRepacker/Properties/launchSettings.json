@@ -2,7 +2,7 @@
   "profiles": {
     "DpkRepacker": {
       "commandName": "Project",
-      "commandLineArgs": "-x D:\\Users\\Kirito\\Desktop\\crown.dpk"
+      "commandLineArgs": "-c D:\\Users\\Kirito\\Desktop\\crown D:\\Users\\Kirito\\Desktop\\crown2.dpk"
     }
   }
 }

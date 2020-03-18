@@ -75,6 +75,7 @@ namespace DpkRepacker
                 var filesOffset = 0x80 + files.Length * 0x80;
                 var fileEntries = new FileEntry[files.Length];
                 var fileEntryPosition = 0;
+                var fileNr = 1;
                 foreach (var file in files)
                 {
                     var nameWithoutPath = Path.GetFileName(file);
@@ -83,6 +84,9 @@ namespace DpkRepacker
 
                     var fileStream = File.OpenRead(file);
                     var ms = new MemoryStream();
+
+                    Console.Write($"File {fileNr++:000}/{fileEntries.Length:000} - ");
+                    Console.WriteLine(nameWithoutPath);
 
                     wp16.Compress(fileStream, ms);
 
@@ -156,7 +160,7 @@ namespace DpkRepacker
 
                 var wp16 = Kompression.Implementations.Compressions.Wp16.Build();
 
-                var fileNr = 0;
+                var fileNr = 1;
                 foreach (var fileEntry in fileEntries)
                 {
                     Console.Write($"File {fileNr++:000}/{fileEntries.Length:000} - ");
